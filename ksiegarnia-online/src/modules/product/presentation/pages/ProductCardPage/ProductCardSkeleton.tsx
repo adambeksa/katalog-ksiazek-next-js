@@ -1,4 +1,4 @@
-import { ROUTES } from "../../../../../routes";
+import { ROUTES } from "@/app/routes";
 import Breadcrumbs from "../../../../shared/ui/components/Breadcrumbs/Breadcrumbs";
 import Skeleton from "../../../../shared/ui/components/Skeleton/Skeleton";
 import "./ProductCardPage.scss";

@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { ROUTES } from "../../../../../routes";
+import Link from "next/link";
+import { ROUTES } from "@/app/routes";
 import "./MainBanner.scss";
 
 function MainBanner() {
@@ -15,7 +15,7 @@ function MainBanner() {
         celach szkoleniowych. Aplikacja, którą właśnie wyświetlasz jest moim
         pierwszym projektem w React.
       </p>
-      <Link to={ROUTES.PRODUCTS} className="banner__cta">
+      <Link href={ROUTES.PRODUCTS} className="banner__cta">
         Przeglądaj książki
       </Link>
     </section>

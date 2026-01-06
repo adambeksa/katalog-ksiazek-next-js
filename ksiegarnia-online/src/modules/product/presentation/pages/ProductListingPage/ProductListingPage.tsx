@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useFilteredProducts } from "../../../hooks/useFilteredProducts";
 import ProductBox from "../../components/ProductBox/ProductBox";

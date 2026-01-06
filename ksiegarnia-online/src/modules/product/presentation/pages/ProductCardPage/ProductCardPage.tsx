@@ -1,6 +1,8 @@
+"use client";
+
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { ROUTES } from "../../../../../routes";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/app/routes";
 import Breadcrumbs from "../../../../shared/ui/components/Breadcrumbs/Breadcrumbs";
 import { useProductQuery } from "../../../hooks/useProductQuery";
 import DownloadModal from "../../components/DownloadModal/DownloadModal";
@@ -9,12 +11,15 @@ import ProductCardError from "./ProductCardError";
 import ProductCardSkeleton from "./ProductCardSkeleton";
 import "./ProductCardPage.scss";
 
-function ProductCardPage() {
-  const { id } = useParams();
-  const navigate = useNavigate();
+interface ProductCardPageProps {
+  productId: string;
+}
+
+function ProductCardPage({ productId }: ProductCardPageProps) {
+  const router = useRouter();
   const [showDownloadModal, setShowDownloadModal] = useState(false);
   const [showAudioModal, setShowAudioModal] = useState(false);
-  const { data: product, isLoading, error } = useProductQuery(id);
+  const { data: product, isLoading, error } = useProductQuery(productId);
 
   if (isLoading) {
     return <ProductCardSkeleton />;
@@ -43,7 +48,7 @@ function ProductCardPage() {
           ]}
         />
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => router.back()}
           className="product-card-page__back-link"
         >
           ← Powrót

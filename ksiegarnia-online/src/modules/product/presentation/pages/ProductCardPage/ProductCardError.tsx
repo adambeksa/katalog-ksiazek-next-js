@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { ROUTES } from "../../../../../routes";
+import Link from "next/link";
+import { ROUTES } from "@/app/routes";
 import "./ProductCardPage.scss";
 
 interface ProductCardErrorProps {
@@ -12,7 +12,7 @@ function ProductCardError({ message }: ProductCardErrorProps) {
       <div className="container">
         <div className="product-card-page__not-found">
           <h2>{message || "Książka nie została znaleziona"}</h2>
-          <Link to={ROUTES.PRODUCTS} className="product-card-page__back-button">
+          <Link href={ROUTES.PRODUCTS} className="product-card-page__back-button">
             Powrót do listy książek
           </Link>
         </div>

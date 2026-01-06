@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import "./ProductBox.scss";
 import { Product } from "../../../domain/Product";
-import { ROUTES } from "../../../../../routes";
+import { ROUTES } from "@/app/routes";
 import { memo } from "react";
 
 interface ProductBoxProps {
@@ -31,7 +31,7 @@ function ProductBox({ product }: ProductBoxProps) {
           dangerouslySetInnerHTML={{ __html: product.description }}
         />
         <Link
-          to={ROUTES.PRODUCT_DETAILS(product.id)}
+          href={ROUTES.PRODUCT_DETAILS(product.id)}
           className="product-box__link"
         >
           Zobacz szczegóły

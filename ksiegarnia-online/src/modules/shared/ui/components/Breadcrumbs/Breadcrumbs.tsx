@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import "./Breadcrumbs.scss";
 
 interface BreadcrumbItem {
@@ -19,7 +19,7 @@ function Breadcrumbs({ items }: BreadcrumbsProps) {
         {items.map((item, index) => (
           <li key={index} className="breadcrumbs__item">
             {item.path ? (
-              <Link to={item.path} className="breadcrumbs__link">
+              <Link href={item.path} className="breadcrumbs__link">
                 {item.label}
               </Link>
             ) : (

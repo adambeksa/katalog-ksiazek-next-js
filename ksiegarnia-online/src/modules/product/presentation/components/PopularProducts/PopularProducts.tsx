@@ -1,3 +1,5 @@
+"use client";
+
 import ProductBox from "../ProductBox/ProductBox";
 import "./PopularProducts.scss";
 import { useProductContext } from "../../../application/context/ProductContext";
@@ -6,7 +8,7 @@ import ProductBoxSkeleton from "../ProductBox/ProductBoxSkeleton";
 function PopularProducts() {
   const { productsCollection: products, loading: isLoading } =
     useProductContext();
-  const popularProducts = products?.slice(0, 3); // It's mock. Download first 3 products as popular products
+  const popularProducts = products?.slice(0, 3);
 
   return (
     <section className="popular-products">
