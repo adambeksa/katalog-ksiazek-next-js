@@ -1,0 +1,23 @@
+.header {
+  background-color: $color-header-bg;
+  color: $color-bg-white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    @include flex-between;
+  }
+
+  &__logo {
+    text-decoration: none;
+    color: $color-bg-white;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+}

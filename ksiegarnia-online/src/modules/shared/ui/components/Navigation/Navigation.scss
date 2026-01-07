@@ -1,0 +1,15 @@
+.navigation {
+  display: flex;
+  gap: 2rem;
+
+  &__link {
+    color: $color-bg-white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
