@@ -1,5 +1,3 @@
-import { ROUTES } from "@/app/routes";
-import Breadcrumbs from "../../../../shared/ui/components/Breadcrumbs/Breadcrumbs";
 import Skeleton from "../../../../shared/ui/components/Skeleton/Skeleton";
 import "./ProductCardPage.scss";
 
@@ -7,14 +5,6 @@ function ProductCardSkeleton() {
   return (
     <div className="product-card-page">
       <div className="container">
-        <Breadcrumbs
-          items={[
-            { label: "Strona Główna", path: ROUTES.HOME },
-            { label: "Katalog książek", path: ROUTES.PRODUCTS },
-            { label: "Ładowanie..." },
-          ]}
-        />
-
         <div className="product-card-page__details">
           <div className="product-card-page__image-section">
             <Skeleton height="400px" width="100%" borderRadius="8px" />

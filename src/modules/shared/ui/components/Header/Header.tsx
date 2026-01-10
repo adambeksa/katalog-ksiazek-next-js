@@ -7,7 +7,7 @@ export function Header() {
   return (
     <header className="header">
       <div className="header__container">
-        <Link href={ROUTES.HOME} className="header__logo">
+        <Link href={ROUTES.HOME.path} className="header__logo">
           <h1 className="header__title">Biblioteka ABE</h1>
         </Link>
         <Navigation />

@@ -1,9 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { ROUTES } from "@/app/routes";
-import Breadcrumbs from "@/modules/shared/ui/components/Breadcrumbs/Breadcrumbs";
 import { useProductQuery } from "../../../hooks/useProductQuery";
+import { useBreadcrumbs } from "@/modules/shared/ui/hooks/useBreadcrumbs";
+import Breadcrumbs from "@/modules/shared/ui/components/Breadcrumbs/Breadcrumbs";
 
 export default function ProductBreadcrumbs() {
   const pathname = usePathname();
@@ -20,14 +20,10 @@ export default function ProductBreadcrumbs() {
   // Assuming simple wrapper:
   const { data: product } = useProductQuery(productId || "");
 
-  const items: { label: string; path?: string }[] = [
-    { label: "Strona Główna", path: ROUTES.HOME },
-    { label: "Katalog książek", path: ROUTES.PRODUCTS },
-  ];
-
-  if (isProductPage && product) {
-    items.push({ label: product.name });
-  }
+  // The hook handles the logic of mapping paths and injecting dynamic label
+  // If product is not loaded yet, it might show ID or empty, depending on hook logic.
+  // We can pass product?.name. If undefined, it falls back to segment (ID).
+  const items = useBreadcrumbs(product?.name);
 
   return (
       <div className="container">

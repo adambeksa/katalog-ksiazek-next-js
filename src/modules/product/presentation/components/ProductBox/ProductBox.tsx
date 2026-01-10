@@ -31,7 +31,7 @@ function ProductBox({ product }: ProductBoxProps) {
           dangerouslySetInnerHTML={{ __html: product.description }}
         />
         <Link
-          href={ROUTES.PRODUCT_DETAILS(product.id)}
+          href={ROUTES.PRODUCT_DETAILS.path(product.id)}
           className="product-box__link"
         >
           Zobacz szczegóły

@@ -12,7 +12,7 @@ function ProductCardError({ message }: ProductCardErrorProps) {
       <div className="container">
         <div className="product-card-page__not-found">
           <h2>{message || "Książka nie została znaleziona"}</h2>
-          <Link href={ROUTES.PRODUCTS} className="product-card-page__back-button">
+          <Link href={ROUTES.PRODUCTS.path} className="product-card-page__back-button">
             Powrót do listy książek
           </Link>
         </div>

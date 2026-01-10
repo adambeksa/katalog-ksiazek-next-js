@@ -15,7 +15,7 @@ function MainBanner() {
         celach szkoleniowych. Aplikacja, którą właśnie wyświetlasz jest moim
         pierwszym projektem w React.
       </p>
-      <Link href={ROUTES.PRODUCTS} className="banner__cta">
+      <Link href={ROUTES.PRODUCTS.path} className="banner__cta">
         Przeglądaj książki
       </Link>
     </section>
