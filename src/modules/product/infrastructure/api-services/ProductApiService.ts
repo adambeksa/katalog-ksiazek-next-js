@@ -5,7 +5,7 @@ import { IProductListDto } from "../interfaces/IProductListDto.interface";
 import { mapListToProduct } from "../adapters/ProductListAdapter";
 import { mapDetailToProduct } from "../adapters/ProductDetailAdapter";
 
-export class ProductDataService {
+export class ProductApiService {
   private client: AxiosInstance;
 
   constructor() {

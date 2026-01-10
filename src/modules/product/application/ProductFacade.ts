@@ -1,10 +1,10 @@
 import { Product } from "../domain/Product";
-import { ProductDataService } from "../infrastructure/data-services/ProductDataService";
+import { ProductApiService } from "../infrastructure/api-services/ProductApiService";
 
 export class ProductFacade {
-  private productDataService: ProductDataService;
+  private productDataService: ProductApiService;
 
-  constructor(productDataService: ProductDataService) {
+  constructor(productDataService: ProductApiService) {
     this.productDataService = productDataService;
   }
 
@@ -17,5 +17,5 @@ export class ProductFacade {
   }
 }
 
-const productDataService = new ProductDataService();
+const productDataService = new ProductApiService();
 export const productFacade = new ProductFacade(productDataService);
