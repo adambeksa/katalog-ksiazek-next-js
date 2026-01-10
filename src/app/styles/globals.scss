@@ -1,6 +1,6 @@
 // Import SCSS variables and mixins
-@import "variables";
-@import "mixins";
+@use "variables" as *;
+@use "mixins" as *;
 
 // CSS Variables (for Next.js compatibility and dark mode)
 :root {
