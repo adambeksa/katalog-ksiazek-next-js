@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📚 Katalog Książek
 
-## Getting Started
+Aplikacja webowa do przeglądania katalogu książek, zbudowana w oparciu o **Next.js 16** z wykorzystaniem **React 19** i **TypeScript**.
 
-First, run the development server:
+## 🚀 Technologie
+
+- **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
+- **Frontend:** React 19
+- **Język:** TypeScript
+- **Stylowanie:** SCSS
+- **Zarządzanie stanem serwera:** [TanStack Query (React Query)](https://tanstack.com/query) v5
+- **HTTP Client:** Axios
+
+## 📁 Struktura projektu
+
+```
+src/
+├── app/                    # Routing Next.js (App Router)
+├── modules/                # Moduły funkcjonalne
+│   ├── banner/             # Moduł banerów
+│   ├── product/            # Moduł produktów (książek)
+│   └── shared/             # Współdzielone komponenty i narzędzia
+└── styles/                 # Globalne style SCSS
+```
+
+## 🛠️ Instalacja
+
+1. **Sklonuj repozytorium:**
+   ```bash
+   git clone <url-repozytorium>
+   cd katalog-ksiazek-next-js
+   ```
+
+2. **Zainstaluj zależności:**
+   ```bash
+   npm install
+   ```
+
+## ▶️ Uruchomienie
+
+### Tryb deweloperski
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Aplikacja będzie dostępna pod adresem [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build produkcyjny
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 📜 Skrypty
 
-To learn more about Next.js, take a look at the following resources:
+| Komenda | Opis |
+|---------|------|
+| `npm run dev` | Uruchomienie serwera deweloperskiego |
+| `npm run build` | Budowanie wersji produkcyjnej |
+| `npm start` | Uruchomienie serwera produkcyjnego |
+| `npm run lint` | Sprawdzenie kodu za pomocą ESLint |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧩 Moduły
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Product
+Główny moduł aplikacji odpowiedzialny za wyświetlanie i zarządzanie katalogiem książek.
 
-## Deploy on Vercel
+### Banner
+Moduł obsługujący banery promocyjne i informacyjne.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Shared
+Współdzielone komponenty UI (Header, Footer, Navigation) oraz narzędzia używane w całej aplikacji.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📝 Licencja
+
+Projekt prywatny.
