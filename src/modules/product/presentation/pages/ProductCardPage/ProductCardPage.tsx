@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ROUTES } from "@/app/routes";
-import Breadcrumbs from "../../../../shared/ui/components/Breadcrumbs/Breadcrumbs";
 import { useProductQuery } from "../../../hooks/useProductQuery";
 import DownloadModal from "../../components/DownloadModal/DownloadModal";
 import ProductAttribution from "../../components/ProductAttribution/ProductAttribution";
@@ -40,13 +38,6 @@ function ProductCardPage({ productId }: ProductCardPageProps) {
   return (
     <div className="product-card-page">
       <div className="container">
-        <Breadcrumbs
-          items={[
-            { label: "Strona Główna", path: ROUTES.HOME },
-            { label: "Katalog książek", path: ROUTES.PRODUCTS },
-            { label: product.name },
-          ]}
-        />
         <button
           onClick={() => router.back()}
           className="product-card-page__back-link"

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useFilteredProducts } from "../../../hooks/useFilteredProducts";
 import ProductBox from "../../components/ProductBox/ProductBox";
-import Breadcrumbs from "../../../../shared/ui/components/Breadcrumbs/Breadcrumbs";
+
 import ProductFilters from "../../components/ProductFilters/ProductFilters";
 import "./ProductListingPage.scss";
 import { IProductFilters } from "../../../domain/interfaces/IProductFilters.interface";
@@ -44,13 +44,6 @@ function ProductListingPage() {
   return (
     <div className="product-listing">
       <div className="container">
-        <Breadcrumbs
-          items={[
-            { label: "Strona Główna", path: "/" },
-            { label: "Katalog książek" },
-          ]}
-        />
-
         <ProductFilters
           filters={filters}
           filterOptions={filterOptions}
