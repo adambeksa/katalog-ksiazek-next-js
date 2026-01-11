@@ -3,10 +3,6 @@ import PopularProducts from "../../components/PopularProducts/PopularProducts";
 import MainBanner from "../../../../banner/presentation/components/MainBanner/MainBanner";
 import { Product } from "@/modules/product/domain/Product";
 
-// ✅ SERVER COMPONENT (domyślnie)
-// - Otrzymuje dane jako props
-// - Nie może używać hooks
-// - Renderuje się na serwerze
 interface HomePageProps {
   popularProducts: Product[];
 }

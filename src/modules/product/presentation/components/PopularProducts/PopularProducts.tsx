@@ -4,10 +4,6 @@ import ProductBox from "../ProductBox/ProductBox";
 import "./PopularProducts.scss";
 import { Product } from "@/modules/product/domain/Product";
 
-// ❌ CLIENT COMPONENT (przez "use client")
-// - Może używać hooks (useState, useEffect, onClick)
-// - Renderuje się w przeglądarce
-// - Otrzymuje dane jako props (nie fetchuje sam)
 interface PopularProductsProps {
   products: Product[];
 }
