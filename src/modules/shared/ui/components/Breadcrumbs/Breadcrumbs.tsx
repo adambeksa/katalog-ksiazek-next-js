@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ROUTES } from "@/app/routes";
 import "./Breadcrumbs.scss";
 
@@ -11,16 +12,15 @@ interface BreadcrumbItem {
 }
 
 interface BreadcrumbsProps {
-  /** Opcjonalna dynamiczna etykieta dla ostatniego segmentu (np. nazwa produktu) */
   currentLabel?: string;
 }
 
 function Breadcrumbs({ currentLabel }: BreadcrumbsProps) {
   const pathname = usePathname();
+  const t = useTranslations("nav");
 
-  // Zbuduj breadcrumbs na podstawie pathname
   const items: BreadcrumbItem[] = [
-    { label: ROUTES.HOME.label, path: ROUTES.HOME.path },
+    { label: t("home"), path: ROUTES.HOME.path },
   ];
 
   const segments = pathname.split("/").filter((segment) => segment !== "");
@@ -30,29 +30,24 @@ function Breadcrumbs({ currentLabel }: BreadcrumbsProps) {
     currentPath += `/${segment}`;
     const isLast = index === segments.length - 1;
 
-    // Znajdź etykietę w ROUTES
-    const routeEntry = Object.values(ROUTES).find((route) => {
-      if (typeof route.path === "string") {
-        return route.path === currentPath;
-      }
-      return false;
-    });
+    let label: string | undefined;
 
-    let label = routeEntry?.label;
+    // Map route paths to translation keys
+    if (currentPath === ROUTES.PRODUCTS.path) {
+      label = t("products");
+    }
 
-    // Dla ostatniego segmentu użyj dynamicznej etykiety jeśli podano
     if (isLast && currentLabel) {
       label = currentLabel;
     }
 
-    // Fallback dla nieznanych segmentów
     if (!label) {
       label = segment;
     }
 
     items.push({
       label,
-      path: isLast ? undefined : currentPath, // Ostatni element bez linku
+      path: isLast ? undefined : currentPath,
     });
   });
 

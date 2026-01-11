@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import "./ProductBox.scss";
 import { IProduct } from "../../../domain/interfaces/IProduct.interface";
 import { ROUTES } from "@/app/routes";
@@ -8,11 +9,9 @@ interface ProductBoxProps {
   product: IProduct;
 }
 
-/**
- * Komponent prezentacyjny boxu produktu w liście
- * Używany w liście produktów
- */
 function ProductBox({ product }: ProductBoxProps) {
+  const t = useTranslations("products.box");
+
   if (!product) {
     return null;
   }
@@ -34,7 +33,7 @@ function ProductBox({ product }: ProductBoxProps) {
           href={ROUTES.PRODUCT_DETAILS.path(product.id)}
           className="product-box__link"
         >
-          Zobacz szczegóły
+          {t("viewDetails")}
         </Link>
       </div>
     </div>

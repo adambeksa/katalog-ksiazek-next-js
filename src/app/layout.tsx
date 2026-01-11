@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 import { ReactQueryProvider } from "./providers";
 import { Header } from "@/modules/shared/ui/components/Header/Header";
 import { Footer } from "@/modules/shared/ui/components/Footer/Footer";
@@ -21,21 +23,25 @@ export const metadata: Metadata = {
   description: "Katalog książek z Wolne Lektury",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const messages = await getMessages();
+
   return (
     <html lang="pl">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ReactQueryProvider>
-          <div className="layout">
-            <Header />
-            <main className="layout__main">{children}</main>
-            <Footer />
-          </div>
-        </ReactQueryProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ReactQueryProvider>
+            <div className="layout">
+              <Header />
+              <main className="layout__main">{children}</main>
+              <Footer />
+            </div>
+          </ReactQueryProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

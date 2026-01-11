@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import "./DownloadModal.scss";
 
 import { IProduct } from "../../../domain/interfaces/IProduct.interface";
@@ -9,7 +10,7 @@ interface DownloadModalProps {
   product: IProduct;
   onClose: () => void;
   title?: string;
-  formats?: any; // To allow flexibility for formats map or audioFormats map
+  formats?: any;
 }
 
 function DownloadModal({
@@ -18,12 +19,12 @@ function DownloadModal({
   title,
   formats,
 }: DownloadModalProps) {
+  const t = useTranslations("downloadModal");
   const [selectedFormat, setSelectedFormat] = useState<any>(null);
 
   const formatsToDisplay = formats || (product && product.formats);
   if (!formatsToDisplay) return null;
 
-  // Filter out formats that are missing (null or empty)
   const availableFormats = Object.entries(formatsToDisplay).filter(
     ([_, val]) => {
       if (Array.isArray(val)) return val.length > 0;
@@ -31,7 +32,6 @@ function DownloadModal({
     },
   );
 
-  // Handle click on a format
   const handleFormatClick = (key: string, val: any, e: React.MouseEvent) => {
     if (Array.isArray(val)) {
       e.preventDefault();
@@ -39,7 +39,6 @@ function DownloadModal({
     }
   };
 
-  // Back to format list
   const handleBack = () => {
     setSelectedFormat(null);
   };
@@ -56,9 +55,9 @@ function DownloadModal({
 
         {!selectedFormat ? (
           <>
-            <h2>{title || "Wybierz format pobierania"}</h2>
+            <h2>{title || t("title")}</h2>
             <p>
-              Książka: <strong>{product.name}</strong>
+              {t("book")} <strong>{product.name}</strong>
             </p>
 
             <div className="download-modal__formats-list">
@@ -72,14 +71,12 @@ function DownloadModal({
                     className="download-modal__format-link"
                     onClick={(e) => handleFormatClick(key, val, e)}
                   >
-                    {Array.isArray(val)
-                      ? `Pobierz ${key.toUpperCase()}`
-                      : `Pobierz ${key.toUpperCase()}`}
+                    {t("download", { format: key.toUpperCase() })}
                   </a>
                 ))
               ) : (
                 <p className="download-modal__no-formats">
-                  Brak dostępnych formatów do pobrania.
+                  {t("noFormats")}
                 </p>
               )}
             </div>
@@ -91,11 +88,11 @@ function DownloadModal({
                 className="download-modal__back-button"
                 onClick={handleBack}
               >
-                ← Wróć
+                {t("back")}
               </button>
-              <h2>Format: {selectedFormat.key.toUpperCase()}</h2>
+              <h2>{t("format", { format: selectedFormat.key.toUpperCase() })}</h2>
             </div>
-            <p>Wybierz plik do pobrania:</p>
+            <p>{t("selectFile")}</p>
             <div className="download-modal__files-list">
               {selectedFormat.files.map((file: any, index: number) => (
                 <a

@@ -1,22 +1,23 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { ROUTES } from "@/app/routes";
 import "./MainBanner.scss";
 
 function MainBanner() {
+  const t = useTranslations("banner");
+
   return (
     <section className="banner">
-      <h1 className="banner__title">Witam w mojej bibliotece!</h1>
+      <h1 className="banner__title">{t("title")}</h1>
       <p className="banner__text">
-        Wszystkie dane o książkach pochodzą z serwisu{" "}
+        {t("text")}{" "}
         <a href="https://wolnelektury.pl/" className="banner__link">
-          WolneLektury.pl
+          {t("source")}
         </a>
-        . Dzięki uprzejmości twórców API, mogę stworzyć swój katalog książek w
-        celach szkoleniowych. Aplikacja, którą właśnie wyświetlasz jest moim
-        pierwszym projektem w React.
+        . {t("description")}
       </p>
       <Link href={ROUTES.PRODUCTS.path} className="banner__cta">
-        Przeglądaj książki
+        {t("cta")}
       </Link>
     </section>
   );

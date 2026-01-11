@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { IProduct } from "../../../domain/interfaces/IProduct.interface";
 import DownloadModal from "../../components/DownloadModal/DownloadModal";
 import ProductAttribution from "../../components/ProductAttribution/ProductAttribution";
@@ -14,10 +15,13 @@ interface ProductCardPageProps {
 
 function ProductCardPage({ product }: ProductCardPageProps) {
   const router = useRouter();
+  const t = useTranslations("productCard");
+  const tCommon = useTranslations("common");
+  const tModal = useTranslations("downloadModal");
+
   const [showDownloadModal, setShowDownloadModal] = useState(false);
   const [showAudioModal, setShowAudioModal] = useState(false);
 
-  // Sprawdzenie czy produkt ma audio (zamiast gettera z klasy)
   const hasAudio = product.audioFormats && Object.keys(product.audioFormats).length > 0;
 
   const handleDownload = () => {
@@ -37,7 +41,7 @@ function ProductCardPage({ product }: ProductCardPageProps) {
           onClick={() => router.back()}
           className="product-card-page__back-link"
         >
-          ← Powrót
+          {tCommon("back")}
         </button>
 
         <div className="product-card-page__details">
@@ -54,7 +58,7 @@ function ProductCardPage({ product }: ProductCardPageProps) {
             <h1>{product.name}</h1>
 
             <div className="product-card-page__description-section">
-              <h3>Opis lektury</h3>
+              <h3>{t("descriptionTitle")}</h3>
               <div
                 className="product-card-page__description-content"
                 dangerouslySetInnerHTML={{ __html: product.description }}
@@ -68,7 +72,7 @@ function ProductCardPage({ product }: ProductCardPageProps) {
                 onClick={handleDownload}
                 className="product-card-page__read-button"
               >
-                Przeczytaj książkę
+                {t("readBook")}
               </button>
 
               {hasAudio && (
@@ -76,7 +80,7 @@ function ProductCardPage({ product }: ProductCardPageProps) {
                   onClick={handleAudioDownload}
                   className="product-card-page__audio-button"
                 >
-                  Posłuchaj audiobooka
+                  {t("listenAudiobook")}
                 </button>
               )}
             </div>
@@ -95,7 +99,7 @@ function ProductCardPage({ product }: ProductCardPageProps) {
         <DownloadModal
           product={product}
           onClose={() => setShowAudioModal(false)}
-          title="Wybierz format audiobooka"
+          title={tModal("audiobookTitle")}
           formats={product.audioFormats}
         />
       )}

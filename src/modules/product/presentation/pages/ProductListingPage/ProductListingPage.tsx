@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { productFilterFacade } from "../../../application/ProductFilterFacade";
 import { IProduct } from "../../../domain/interfaces/IProduct.interface";
 import ProductBox from "../../components/ProductBox/ProductBox";
@@ -16,25 +17,25 @@ interface ProductListingPageProps {
 }
 
 function ProductListingPage({ initialProducts }: ProductListingPageProps) {
+  const t = useTranslations("products");
+  const tCommon = useTranslations("common");
+
   const [filters, setFilters] = useState<IProductFilters>({
-    author: "Wszystkie",
-    epoch: "Wszystkie",
-    genre: "Wszystkie",
-    kind: "Wszystkie",
+    author: tCommon("all"),
+    epoch: tCommon("all"),
+    genre: tCommon("all"),
+    kind: tCommon("all"),
   });
   const [page, setPage] = useState(1);
 
-  // Reset strony gdy filtry się zmienią
   useEffect(() => {
     setPage(1);
   }, [filters]);
 
-  // Oblicz opcje filtrów na podstawie wszystkich produktów
   const filterOptions: IFilterOptions = useMemo(() => {
     return productFilterFacade.deriveFilterOptions(initialProducts);
   }, [initialProducts]);
 
-  // Filtruj i paginuj produkty
   const { items: products, total } = useMemo(() => {
     return productFilterFacade.filterProducts(initialProducts, { filters, page });
   }, [initialProducts, filters, page]);
@@ -66,7 +67,7 @@ function ProductListingPage({ initialProducts }: ProductListingPageProps) {
 
         {products.length === 0 ? (
           <div className="product-listing__empty">
-            <p>Brak książek w wybranej kategorii.</p>
+            <p>{t("listing.empty")}</p>
           </div>
         ) : (
           <div className="pagination">
@@ -75,17 +76,17 @@ function ProductListingPage({ initialProducts }: ProductListingPageProps) {
               onClick={() => setPage((p) => p - 1)}
               className="pagination__button"
             >
-              Poprzednia
+              {t("pagination.previous")}
             </button>
             <span className="pagination__info">
-              Strona {page} z {totalPages}
+              {t("pagination.pageInfo", { page, total: totalPages })}
             </span>
             <button
               disabled={page === totalPages}
               onClick={() => setPage((p) => p + 1)}
               className="pagination__button"
             >
-              Następna
+              {t("pagination.next")}
             </button>
           </div>
         )}
