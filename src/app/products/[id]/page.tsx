@@ -1,4 +1,4 @@
-import { ProductApiService } from "@/modules/product/infrastructure/api-services/ProductApiService";
+import { productFacade } from "@/modules/product/application/ProductFacade";
 import ProductCardPage from "@/modules/product/presentation/pages/ProductCardPage/ProductCardPage";
 import { notFound } from "next/navigation";
 
@@ -11,8 +11,7 @@ interface ProductPageProps {
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = await params;
 
-  const productService = new ProductApiService();
-  const product = await productService.getById(id);
+  const product = await productFacade.getProductById(id);
 
   if (!product) {
     notFound();

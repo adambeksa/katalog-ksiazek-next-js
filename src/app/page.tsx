@@ -1,9 +1,8 @@
-import { ProductApiService } from "@/modules/product/infrastructure/api-services/ProductApiService";
+import { productFacade } from "@/modules/product/application/ProductFacade";
 import HomePage from "@/modules/product/presentation/pages/HomePage/HomePage";
 
 export default async function Home() {
-  const productService = new ProductApiService();
-  const allProducts = await productService.getAll();
+  const allProducts = await productFacade.getAllProducts();
   
   const popularProducts = allProducts.slice(0, 3);
 
