@@ -19,12 +19,7 @@ function ProductListingSkeleton({
   return (
     <div className="product-listing">
       <div className="container">
-        <Breadcrumbs
-          items={[
-            { label: "Strona Główna", path: "/" },
-            { label: "Katalog książek" },
-          ]}
-        />
+        <Breadcrumbs />
 
         <ProductFilters
           filters={filters}

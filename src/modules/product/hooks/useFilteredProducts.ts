@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { productFilterFacade } from "../application/ProductFilterFacade";
-import { Product } from "../domain/Product";
+import { IProduct } from "../domain/interfaces/IProduct.interface";
 import { IProductFilters } from "../domain/interfaces/IProductFilters.interface";
 import { IFilterOptions } from "../domain/interfaces/IFilterOptions.interface";
 import { useProductContext } from "../application/context/ProductContext";
@@ -8,7 +8,7 @@ import { useProductContext } from "../application/context/ProductContext";
 export function useFilteredProducts(filters: IProductFilters = {}) {
   const { productsCollection, loading, error } = useProductContext();
 
-  const [products, setFilteredProducts] = useState<Product[]>([]);
+  const [products, setFilteredProducts] = useState<IProduct[]>([]);
   const [filterOptions, setFilterOptions] = useState<IFilterOptions>({
     authors: [],
     epochs: [],

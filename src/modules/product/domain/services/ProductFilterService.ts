@@ -1,10 +1,10 @@
-import { Product } from "../Product";
+import { IProduct } from "../interfaces/IProduct.interface";
 import { IProductFilters } from "../interfaces/IProductFilters.interface";
 import { IFilterOptions } from "../interfaces/IFilterOptions.interface";
 
 export class ProductFilterService {
   filterAndPaginate(
-    products: Product[],
+    products: IProduct[],
     {
       filters = {},
       page = 1,
@@ -42,7 +42,7 @@ export class ProductFilterService {
     return { items, total };
   }
 
-  deriveFilterOptions(products: Product[]): IFilterOptions {
+  deriveFilterOptions(products: IProduct[]): IFilterOptions {
     const authors = this.getDistinctValues(products, (p) => p.author);
     const epochs = this.getDistinctValues(products, (p) => p.epoch);
     const genres = this.getDistinctValues(products, (p) => p.genre);
@@ -57,10 +57,11 @@ export class ProductFilterService {
   }
 
   private getDistinctValues(
-    products: Product[],
-    selector: (p: Product) => string,
+    products: IProduct[],
+    selector: (p: IProduct) => string,
   ): string[] {
     const values = new Set(products.map(selector));
     return Array.from(values).sort();
   }
 }
+

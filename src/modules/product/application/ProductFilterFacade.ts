@@ -1,7 +1,7 @@
 import { ProductFilterService } from "../domain/services/ProductFilterService";
 import { IProductFilters } from "../domain/interfaces/IProductFilters.interface";
 import { IFilterOptions } from "../domain/interfaces/IFilterOptions.interface";
-import { Product } from "../domain/Product";
+import { IProduct } from "../domain/interfaces/IProduct.interface";
 
 export class ProductFilterFacade {
   private productFilterService: ProductFilterService;
@@ -11,7 +11,7 @@ export class ProductFilterFacade {
   }
 
   filterProducts(
-    products: Product[],
+    products: IProduct[],
     {
       filters = {},
       page = 1,
@@ -25,9 +25,10 @@ export class ProductFilterFacade {
     });
   }
 
-  deriveFilterOptions(products: Product[]): IFilterOptions {
+  deriveFilterOptions(products: IProduct[]): IFilterOptions {
     return this.productFilterService.deriveFilterOptions(products);
   }
 }
 
 export const productFilterFacade = new ProductFilterFacade();
+

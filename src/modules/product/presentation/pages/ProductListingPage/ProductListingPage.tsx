@@ -1,24 +1,45 @@
 "use client";
 
-import { useState } from "react";
-import { useFilteredProducts } from "../../../hooks/useFilteredProducts";
+import { useState, useMemo, useEffect } from "react";
+import { productFilterFacade } from "../../../application/ProductFilterFacade";
+import { IProduct } from "../../../domain/interfaces/IProduct.interface";
 import ProductBox from "../../components/ProductBox/ProductBox";
 
 import ProductFilters from "../../components/ProductFilters/ProductFilters";
 import "./ProductListingPage.scss";
 import { IProductFilters } from "../../../domain/interfaces/IProductFilters.interface";
-import ProductListingSkeleton from "./ProductListingSkeleton";
-import ProductListingError from "./ProductListingError";
+import { IFilterOptions } from "../../../domain/interfaces/IFilterOptions.interface";
+import Breadcrumbs from "@/modules/shared/ui/components/Breadcrumbs/Breadcrumbs";
 
-function ProductListingPage() {
+interface ProductListingPageProps {
+  initialProducts: IProduct[];
+}
+
+function ProductListingPage({ initialProducts }: ProductListingPageProps) {
   const [filters, setFilters] = useState<IProductFilters>({
     author: "Wszystkie",
     epoch: "Wszystkie",
     genre: "Wszystkie",
     kind: "Wszystkie",
   });
-  const { products, filterOptions, loading, error, page, setPage, totalPages } =
-    useFilteredProducts(filters);
+  const [page, setPage] = useState(1);
+
+  // Reset strony gdy filtry się zmienią
+  useEffect(() => {
+    setPage(1);
+  }, [filters]);
+
+  // Oblicz opcje filtrów na podstawie wszystkich produktów
+  const filterOptions: IFilterOptions = useMemo(() => {
+    return productFilterFacade.deriveFilterOptions(initialProducts);
+  }, [initialProducts]);
+
+  // Filtruj i paginuj produkty
+  const { items: products, total } = useMemo(() => {
+    return productFilterFacade.filterProducts(initialProducts, { filters, page });
+  }, [initialProducts, filters, page]);
+
+  const totalPages = Math.ceil(total / 20);
 
   const handleFilterChange = (key: keyof IProductFilters, value: string) => {
     setFilters((prev) => ({
@@ -27,23 +48,10 @@ function ProductListingPage() {
     }));
   };
 
-  if (loading) {
-    return (
-      <ProductListingSkeleton
-        filters={filters}
-        filterOptions={filterOptions}
-        onFilterChange={handleFilterChange}
-      />
-    );
-  }
-
-  if (error) {
-    return <ProductListingError message={error} />;
-  }
-
   return (
     <div className="product-listing">
       <div className="container">
+        <Breadcrumbs />
         <ProductFilters
           filters={filters}
           filterOptions={filterOptions}

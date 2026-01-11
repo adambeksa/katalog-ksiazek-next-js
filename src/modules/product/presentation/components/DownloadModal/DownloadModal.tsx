@@ -3,10 +3,10 @@
 import { useState } from "react";
 import "./DownloadModal.scss";
 
-import { Product } from "../../../domain/Product";
+import { IProduct } from "../../../domain/interfaces/IProduct.interface";
 
 interface DownloadModalProps {
-  product: Product;
+  product: IProduct;
   onClose: () => void;
   title?: string;
   formats?: any; // To allow flexibility for formats map or audioFormats map

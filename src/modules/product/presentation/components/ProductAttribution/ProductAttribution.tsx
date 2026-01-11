@@ -1,8 +1,8 @@
 import "./ProductAttribution.scss";
-import { Product } from "../../../domain/Product";
+import { IProduct } from "../../../domain/interfaces/IProduct.interface";
 
 interface ProductAttributionProps {
-  product: Product;
+  product: IProduct;
 }
 
 function ProductAttribution({ product }: ProductAttributionProps) {

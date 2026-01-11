@@ -2,30 +2,23 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useProductQuery } from "../../../hooks/useProductQuery";
+import { IProduct } from "../../../domain/interfaces/IProduct.interface";
 import DownloadModal from "../../components/DownloadModal/DownloadModal";
 import ProductAttribution from "../../components/ProductAttribution/ProductAttribution";
-import ProductCardError from "./ProductCardError";
-import ProductCardSkeleton from "./ProductCardSkeleton";
+import Breadcrumbs from "@/modules/shared/ui/components/Breadcrumbs/Breadcrumbs";
 import "./ProductCardPage.scss";
 
 interface ProductCardPageProps {
-  productId: string;
+  product: IProduct;
 }
 
-function ProductCardPage({ productId }: ProductCardPageProps) {
+function ProductCardPage({ product }: ProductCardPageProps) {
   const router = useRouter();
   const [showDownloadModal, setShowDownloadModal] = useState(false);
   const [showAudioModal, setShowAudioModal] = useState(false);
-  const { data: product, isLoading, error } = useProductQuery(productId);
 
-  if (isLoading) {
-    return <ProductCardSkeleton />;
-  }
-
-  if (error || !product) {
-    return <ProductCardError message={(error as Error)?.message} />;
-  }
+  // Sprawdzenie czy produkt ma audio (zamiast gettera z klasy)
+  const hasAudio = product.audioFormats && Object.keys(product.audioFormats).length > 0;
 
   const handleDownload = () => {
     setShowDownloadModal(true);
@@ -38,6 +31,8 @@ function ProductCardPage({ productId }: ProductCardPageProps) {
   return (
     <div className="product-card-page">
       <div className="container">
+        <Breadcrumbs currentLabel={product.name} />
+        
         <button
           onClick={() => router.back()}
           className="product-card-page__back-link"
@@ -76,7 +71,7 @@ function ProductCardPage({ productId }: ProductCardPageProps) {
                 Przeczytaj książkę
               </button>
 
-              {product.hasAudio && (
+              {hasAudio && (
                 <button
                   onClick={handleAudioDownload}
                   className="product-card-page__audio-button"

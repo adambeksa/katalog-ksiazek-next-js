@@ -1,11 +1,11 @@
 import Link from "next/link";
 import "./ProductBox.scss";
-import { Product } from "../../../domain/Product";
+import { IProduct } from "../../../domain/interfaces/IProduct.interface";
 import { ROUTES } from "@/app/routes";
 import { memo } from "react";
 
 interface ProductBoxProps {
-  product: Product;
+  product: IProduct;
 }
 
 /**
