@@ -61,7 +61,7 @@ export class ProductFilterService {
     selector: (p: IProduct) => string,
   ): string[] {
     const values = new Set(products.map(selector));
-    return Array.from(values).sort();
+    return Array.from(values).filter(Boolean).sort();
   }
 }
 

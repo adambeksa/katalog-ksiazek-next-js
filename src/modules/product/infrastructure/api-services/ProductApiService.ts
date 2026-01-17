@@ -35,28 +35,4 @@ export class ProductApiService {
       return null;
     }
   }
-
-  async getAuthors(): Promise<string[]> {
-    return this.getDistinctValues((p) => p.author);
-  }
-
-  async getEpochs(): Promise<string[]> {
-    return this.getDistinctValues((p) => p.epoch);
-  }
-
-  async getGenres(): Promise<string[]> {
-    return this.getDistinctValues((p) => p.genre);
-  }
-
-  async getKinds(): Promise<string[]> {
-    return this.getDistinctValues((p) => p.kind);
-  }
-
-  private async getDistinctValues(
-    selector: (p: Product) => string,
-  ): Promise<string[]> {
-    const products = await this.getAll();
-    const values = new Set(products.map(selector));
-    return Array.from(values).sort();
-  }
 }
