@@ -20,6 +20,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Biblioteka ABE",
   description: "Katalog książek z Wolne Lektury",
+  robots: "noindex, nofollow",
 };
 
 export default async function RootLayout({
