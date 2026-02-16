@@ -14,7 +14,7 @@
     "productDetails": "Szczegóły książki"
   },
   "banner": {
-    "title": "Witam w mojej bibliotece!",
+    "title": "Witam w bibliotece!",
     "text": "Wszystkie dane o książkach pochodzą z serwisu",
     "source": "WolneLektury.pl",
     "description": "Dzięki uprzejmości twórców API, mogę stworzyć swój katalog książek w celach szkoleniowych. Aplikacja, którą właśnie wyświetlasz jest moim pierwszym projektem w Next.js.",
