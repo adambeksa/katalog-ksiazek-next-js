@@ -26,7 +26,12 @@
     },
     "listing": {
       "empty": "Brak książek w wybranej kategorii.",
-      "error": "Błąd ładowania produktów"
+      "error": "Błąd ładowania produktów",
+      "columns": {
+        "number": "Nr",
+        "title": "Tytuł",
+        "audio": "Audio"
+      }
     },
     "filters": {
       "author": "Autor",

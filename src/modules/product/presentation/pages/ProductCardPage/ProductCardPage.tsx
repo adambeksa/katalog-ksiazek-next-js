@@ -18,6 +18,7 @@ function ProductCardPage({ product }: ProductCardPageProps) {
   const t = useTranslations("productCard");
   const tCommon = useTranslations("common");
   const tModal = useTranslations("downloadModal");
+  const tFilters = useTranslations("products.filters");
 
   const [showDownloadModal, setShowDownloadModal] = useState(false);
   const [showAudioModal, setShowAudioModal] = useState(false);
@@ -56,6 +57,21 @@ function ProductCardPage({ product }: ProductCardPageProps) {
           <div className="product-card-page__info-section">
             <h2>{product.author}</h2>
             <h1>{product.name}</h1>
+
+            <dl className="product-card-page__facts">
+              <div>
+                <dt>{tFilters("epoch")}</dt>
+                <dd>{product.epoch}</dd>
+              </div>
+              <div>
+                <dt>{tFilters("kind")}</dt>
+                <dd>{product.kind}</dd>
+              </div>
+              <div>
+                <dt>{tFilters("genre")}</dt>
+                <dd>{product.genre}</dd>
+              </div>
+            </dl>
 
             <div className="product-card-page__description-section">
               <h3>{t("descriptionTitle")}</h3>

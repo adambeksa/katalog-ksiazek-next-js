@@ -1,17 +1,15 @@
 .footer {
-  background-color: $color-footer-bg;
-  color: $color-bg-white;
-  padding: 1.5rem 0;
-  margin-top: auto;
+  margin-top: $space-16;
+  border-top: $rule-heavy;
 
   &__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    text-align: center;
+    @include container;
+    padding-top: $space-3;
+    padding-bottom: $space-8;
   }
 
   &__text {
-    margin: 0;
+    font-size: $text-sm;
+    color: $mid;
   }
 }

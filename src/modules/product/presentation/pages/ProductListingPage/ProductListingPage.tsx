@@ -5,12 +5,15 @@ import { useTranslations } from "next-intl";
 import { productFilterFacade } from "../../../application/ProductFilterFacade";
 import { IProduct } from "../../../domain/interfaces/IProduct.interface";
 import ProductBox from "../../components/ProductBox/ProductBox";
+import ProductListingHead from "./ProductListingHead";
 
 import ProductFilters from "../../components/ProductFilters/ProductFilters";
 import "./ProductListingPage.scss";
 import { IProductFilters } from "../../../domain/interfaces/IProductFilters.interface";
 import { IFilterOptions } from "../../../domain/interfaces/IFilterOptions.interface";
 import Breadcrumbs from "@/modules/shared/ui/components/Breadcrumbs/Breadcrumbs";
+
+const PAGE_SIZE = 20;
 
 interface ProductListingPageProps {
   initialProducts: IProduct[];
@@ -40,7 +43,7 @@ function ProductListingPage({ initialProducts }: ProductListingPageProps) {
     return productFilterFacade.filterProducts(initialProducts, { filters, page });
   }, [initialProducts, filters, page]);
 
-  const totalPages = Math.ceil(total / 20);
+  const totalPages = Math.ceil(total / PAGE_SIZE);
 
   const handleFilterChange = (key: keyof IProductFilters, value: string) => {
     setFilters((prev) => ({
@@ -59,7 +62,11 @@ function ProductListingPage({ initialProducts }: ProductListingPageProps) {
           onFilterChange={handleFilterChange}
         />
 
-        <div className="product-listing__grid">
+        <ProductListingHead />
+        <div
+          className="product-listing__grid"
+          style={{ counterReset: `book ${(page - 1) * PAGE_SIZE}` }}
+        >
           {products.map((product) => (
             <ProductBox key={product.id} product={product} />
           ))}

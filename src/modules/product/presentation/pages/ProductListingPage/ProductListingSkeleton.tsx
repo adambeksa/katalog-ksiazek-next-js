@@ -2,6 +2,7 @@ import Breadcrumbs from "../../../../shared/ui/components/Breadcrumbs/Breadcrumb
 import ProductBoxSkeleton from "../../components/ProductBox/ProductBoxSkeleton";
 import ProductFiltersSkeleton from "../../components/ProductFilters/ProductFiltersSkeleton";
 import "./ProductListingPage.scss";
+import ProductListingHead from "./ProductListingHead";
 
 function ProductListingSkeleton() {
   return (
@@ -11,6 +12,7 @@ function ProductListingSkeleton() {
 
         <ProductFiltersSkeleton/>
 
+        <ProductListingHead />
         <div className="product-listing__grid">
           {Array.from({ length: 9 }).map((_, index) => (
             <ProductBoxSkeleton key={index} />

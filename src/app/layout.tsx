@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Archivo } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Header } from "@/modules/shared/ui/components/Header/Header";
@@ -7,14 +7,10 @@ import { Footer } from "@/modules/shared/ui/components/Footer/Footer";
 import "@/styles/globals.scss";
 import "@/styles/layout.scss";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const archivo = Archivo({
+  variable: "--font-archivo",
+  subsets: ["latin", "latin-ext"],
+  axes: ["wdth"],
 });
 
 export const metadata: Metadata = {
@@ -32,7 +28,7 @@ export default async function RootLayout({
 
   return (
     <html lang="pl">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={archivo.variable}>
         <NextIntlClientProvider messages={messages}>
           <div className="layout">
             <Header />
