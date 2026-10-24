@@ -69,6 +69,7 @@
     "source": "Źródło:",
     "sourceText": "Książka pochodzi z serwisu",
     "license": "Licencja:",
+    "licenseFallback": "szczegóły na stronie utworu w Wolnych Lekturach",
     "narrator": "Lektor:",
     "director": "Reżyser:",
     "wolneLektury": "Wolne Lektury"

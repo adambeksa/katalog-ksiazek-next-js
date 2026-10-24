@@ -32,11 +32,21 @@ function ProductAttribution({ product }: ProductAttributionProps) {
           </a>
         </div>
 
-        {product.license && (
-          <div className="product-attribution__item">
-            <strong>{t("license")}</strong> {product.license}
-          </div>
-        )}
+        <div className="product-attribution__item">
+          <strong>{t("license")}</strong>{" "}
+          {product.license && !product.licenseUrl ? (
+            product.license
+          ) : (
+            <a
+              href={product.licenseUrl || product.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="product-attribution__link"
+            >
+              {product.license || t("licenseFallback")}
+            </a>
+          )}
+        </div>
 
         {product.audioArtist && (
           <div className="product-attribution__item">

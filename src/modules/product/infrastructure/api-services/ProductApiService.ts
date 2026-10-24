@@ -4,6 +4,7 @@ import { IProductDto } from "../interfaces/IProductDto.interface";
 import { IProductListDto } from "../interfaces/IProductListDto.interface";
 import { mapListToProduct } from "../adapters/ProductListAdapter";
 import { mapDetailToProduct } from "../adapters/ProductDetailAdapter";
+import { extractLicenseData, LicenseData } from "../utils/productAdapterUtils";
 
 export class ProductApiService {
   private client: AxiosInstance;
@@ -29,10 +30,27 @@ export class ProductApiService {
       console.log(`Fetching product with ID: ${id}`);
       const res = await this.client.get<IProductDto>(`/books/${id}`);
       console.log(`Product fetched successfully:`, res.data);
-      return mapDetailToProduct(res.data);
+      const licenseData = await this.getLicenseData(res.data.xml);
+      return mapDetailToProduct(res.data, licenseData);
     } catch (error) {
       console.error(`Error fetching product ${id}:`, error);
       return null;
+    }
+  }
+
+  // Pobiera tylko początek pliku XML - nagłówek z licencją mieści się w kilku KB
+  private async getLicenseData(xmlUrl?: string): Promise<LicenseData | undefined> {
+    if (!xmlUrl) return undefined;
+
+    try {
+      const res = await axios.get<string>(xmlUrl, {
+        headers: { Range: "bytes=0-16383" },
+        responseType: "text",
+      });
+      return extractLicenseData(res.data);
+    } catch (error) {
+      console.error(`Error fetching license from ${xmlUrl}:`, error);
+      return undefined;
     }
   }
 }
